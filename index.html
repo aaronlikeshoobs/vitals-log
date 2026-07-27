@@ -91,10 +91,7 @@ const METRICS = [
   {id:'weight', label:'Weight', unit:'lb', cat:'Body Composition', auto:true},
   {id:'bmi', label:'BMI', unit:'', cat:'Body Composition', auto:true},
   {id:'fat_mass', label:'Fat Mass', unit:'%', cat:'Body Composition', auto:true},
-  {id:'muscle_mass', label:'Muscle Mass', unit:'lb', cat:'Body Composition', auto:false},
-  {id:'lean_mass', label:'Lean Mass', unit:'lb', cat:'Body Composition', auto:false},
-  {id:'bone_mass', label:'Bone Mass', unit:'lb', cat:'Body Composition', auto:false},
-  {id:'water_mass', label:'Water Mass', unit:'lb', cat:'Body Composition', auto:false},
+  {id:'lean_mass', label:'Lean Mass', unit:'lb', cat:'Body Composition', auto:true},
 
   {id:'steps', label:'Steps', unit:'/day', cat:'Daily Activity', auto:true},
   {id:'distance', label:'Walk/Run Distance', unit:'mi', cat:'Daily Activity', auto:true},
@@ -164,8 +161,8 @@ function render(store){
         const sign = d > 0 ? '+' : '';
         deltaHTML = `<div class="delta ${cls}">${sign}${fmtNum(d)} since start</div>`;
       }
-      const stale = latest && !m.auto === false && daysSince(latest.date) > 14
-        ? `<span class="stale-badge">STALE</span>` : (!m.auto ? `<span class="stale-badge">MANUAL</span>` : '');
+      const stale = latest && daysSince(latest.date) > 14
+        ? `<span class="stale-badge">STALE</span>` : '';
       html += `
         <div class="metric-row">
           <div class="info">
