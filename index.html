@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitals Log</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --ink:#0F1215;
+    --panel:#171C20;
+    --line:#2A3238;
+    --text:#E9EDEF;
+    --muted:#8B96A0;
+    --pulse:#6EE7B7;
+    --red:#FF6B6B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased;}
+  body{padding-bottom:60px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  header{
+    padding:28px 20px 20px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  header .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--pulse);
+    margin-bottom:6px;
+  }
+  header h1{ font-size:26px; font-weight:700; letter-spacing:-0.01em; }
+  header .sub{ color:var(--muted); font-size:13px; margin-top:4px; }
+  .ecg{ position:absolute; bottom:0; left:0; right:0; height:28px; opacity:0.5; }
+  .ecg path{
+    stroke:var(--pulse); stroke-width:1.5; fill:none;
+    stroke-dasharray:400; stroke-dashoffset:400;
+    animation:draw 3.5s ease-out forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .category{ padding:22px 20px 4px; }
+  .category-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px; }
+  .category-head h2{ font-size:13px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; }
+  .category-head .count{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .metric-row{ display:flex; align-items:center; gap:12px; padding:13px 14px; border-bottom:1px solid var(--line); }
+  .metric-row:last-child{ border-bottom:none; }
+  .metric-row .info{ flex:1; min-width:0; }
+  .metric-row .label{ font-size:13.5px; font-weight:500; }
+  .metric-row .date{ font-size:11px; color:var(--muted); margin-top:2px; }
+  .metric-row .spark{ width:56px; height:24px; flex-shrink:0; }
+  .metric-row .valwrap{ text-align:right; flex-shrink:0; min-width:74px; }
+  .metric-row .val{ font-size:15px; font-weight:600; }
+  .metric-row .unit{ font-size:10.5px; color:var(--muted); margin-left:2px; }
+  .metric-row .delta{ font-size:10.5px; margin-top:2px; }
+  .delta.up{ color:var(--pulse); }
+  .delta.down{ color:var(--red); }
+  .delta.flat{ color:var(--muted); }
+  .loading, .error{ text-align:center; padding:60px 20px; color:var(--muted); font-size:13px; }
+  .stale-badge{
+    display:inline-block; font-size:9.5px; font-family:'IBM Plex Mono',monospace;
+    color:var(--muted); border:1px solid var(--line); border-radius:4px;
+    padding:1px 5px; margin-left:6px; vertical-align:middle;
+  }
+  footer{ text-align:center; padding:24px 20px; color:var(--muted); font-size:11px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Started 25 Jul 2026 · Auto-synced daily</div>
+  <h1>Vitals Log</h1>
+  <div class="sub">Body composition, daily activity &amp; cycling output — tracked over time</div>
+  <svg class="ecg" viewBox="0 0 400 28" preserveAspectRatio="none">
+    <path d="M0,14 L60,14 L72,14 L80,2 L88,26 L96,14 L120,14 L400,14"/>
+  </svg>
+</header>
+
+<div id="app"><div class="loading">Loading…</div></div>
+<footer>Synced from Apple Health via Health Auto Export → Google Drive → GitHub Actions</footer>
+
+<script>
+const METRICS = [
+  {id:'weight', label:'Weight', unit:'lb', cat:'Body Composition', auto:true},
+  {id:'bmi', label:'BMI', unit:'', cat:'Body Composition', auto:true},
+  {id:'fat_mass', label:'Fat Mass', unit:'%', cat:'Body Composition', auto:true},
+  {id:'muscle_mass', label:'Muscle Mass', unit:'lb', cat:'Body Composition', auto:false},
+  {id:'lean_mass', label:'Lean Mass', unit:'lb', cat:'Body Composition', auto:false},
+  {id:'bone_mass', label:'Bone Mass', unit:'lb', cat:'Body Composition', auto:false},
+  {id:'water_mass', label:'Water Mass', unit:'lb', cat:'Body Composition', auto:false},
+
+  {id:'steps', label:'Steps', unit:'/day', cat:'Daily Activity', auto:true},
+  {id:'distance', label:'Walk/Run Distance', unit:'mi', cat:'Daily Activity', auto:true},
+  {id:'active_energy', label:'Active Energy', unit:'kcal', cat:'Daily Activity', auto:true},
+  {id:'exercise_time', label:'Exercise Time', unit:'min', cat:'Daily Activity', auto:true},
+  {id:'flights', label:'Flights Climbed', unit:'', cat:'Daily Activity', auto:true},
+  {id:'walking_speed', label:'Walking Speed', unit:'mph', cat:'Daily Activity', auto:true},
+  {id:'resting_hr', label:'Resting Heart Rate', unit:'bpm', cat:'Daily Activity', auto:true},
+  {id:'hrv', label:'HRV', unit:'ms', cat:'Daily Activity', auto:true},
+
+  {id:'vo2max', label:'VO2 Max', unit:'ml/kg/min', cat:'Point-in-Time', auto:true},
+  {id:'cardio_recovery', label:'Cardio Recovery', unit:'bpm', cat:'Point-in-Time', auto:true},
+  {id:'six_min_walk', label:'6-Min Walk Test', unit:'m', cat:'Point-in-Time', auto:true},
+
+  {id:'cyc_distance', label:'Ride Distance', unit:'mi', cat:'Cycling', auto:true},
+  {id:'cyc_speed', label:'Ride Speed', unit:'mph', cat:'Cycling', auto:true},
+  {id:'cyc_power', label:'Ride Power', unit:'W', cat:'Cycling', auto:true},
+  {id:'cyc_cadence', label:'Ride Cadence', unit:'rpm', cat:'Cycling', auto:true},
+];
+
+function fmtNum(n){
+  if(n === undefined || n === null) return '—';
+  if(Math.abs(n) >= 100) return n.toFixed(0);
+  if(Math.abs(n) >= 10) return n.toFixed(1);
+  return n.toFixed(2);
+}
+function fmtDate(d){
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+}
+function daysSince(d){
+  const dt = new Date(d + 'T00:00:00');
+  return Math.floor((Date.now() - dt.getTime()) / 86400000);
+}
+function sparkSVG(history){
+  if(history.length < 2){
+    return `<svg class="spark" viewBox="0 0 56 24"><line x1="0" y1="12" x2="56" y2="12" stroke="#2A3238" stroke-width="1.5"/></svg>`;
+  }
+  const vals = history.map(h => h.value);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const range = (max - min) || 1;
+  const pts = vals.map((v,i) => {
+    const x = (i/(vals.length-1)) * 54 + 1;
+    const y = 22 - ((v-min)/range) * 20;
+    return `${x},${y}`;
+  }).join(' ');
+  const lastUp = vals[vals.length-1] >= vals[0];
+  const color = lastUp ? '#6EE7B7' : '#FF6B6B';
+  return `<svg class="spark" viewBox="0 0 56 24"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+function render(store){
+  const app = document.getElementById('app');
+  const categories = [...new Set(METRICS.map(m => m.cat))];
+  let html = '';
+  categories.forEach(cat => {
+    const metrics = METRICS.filter(m => m.cat === cat);
+    html += `<div class="category"><div class="category-head"><h2>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
+    metrics.forEach(m => {
+      const hist = (store[m.id] || []).slice().sort((a,b) => a.date.localeCompare(b.date));
+      const latest = hist[hist.length-1];
+      const first = hist[0];
+      let deltaHTML = '';
+      if(hist.length > 1 && latest && first){
+        const d = latest.value - first.value;
+        const cls = Math.abs(d) < 0.001 ? 'flat' : (d > 0 ? 'up' : 'down');
+        const sign = d > 0 ? '+' : '';
+        deltaHTML = `<div class="delta ${cls}">${sign}${fmtNum(d)} since start</div>`;
+      }
+      const stale = latest && !m.auto === false && daysSince(latest.date) > 14
+        ? `<span class="stale-badge">STALE</span>` : (!m.auto ? `<span class="stale-badge">MANUAL</span>` : '');
+      html += `
+        <div class="metric-row">
+          <div class="info">
+            <div class="label">${m.label}${stale}</div>
+            <div class="date mono">${latest ? fmtDate(latest.date) : '—'}</div>
+          </div>
+          ${sparkSVG(hist)}
+          <div class="valwrap">
+            <div class="val mono">${latest ? fmtNum(latest.value) : '—'}<span class="unit">${m.unit}</span></div>
+            ${deltaHTML}
+          </div>
+        </div>`;
+    });
+    html += `</div></div>`;
+  });
+  app.innerHTML = html;
+}
+
+fetch('./data.json', {cache: 'no-store'})
+  .then(r => {
+    if(!r.ok) throw new Error('data.json not found');
+    return r.json();
+  })
+  .then(render)
+  .catch(err => {
+    document.getElementById('app').innerHTML =
+      `<div class="error">Couldn't load data.json — ${err.message}</div>`;
+  });
+</script>
+
+</body>
+</html>
