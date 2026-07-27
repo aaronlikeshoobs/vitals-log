@@ -16,13 +16,13 @@
     --pulse:#4FD9AE;
     --red:#FF6B6B;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased;}
-  body{padding-bottom:60px;}
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased; touch-action:manipulation;}
+  body{padding-bottom:70px;}
   .mono{font-family:'IBM Plex Mono',monospace;}
 
   header{
-    padding:28px 20px 20px;
+    padding:32px 20px 24px;
     border-bottom:1px solid var(--line);
     position:relative;
     overflow:hidden;
@@ -33,10 +33,10 @@
     letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--pulse);
-    margin-bottom:6px;
+    margin-bottom:8px;
   }
-  header h1{ font-size:26px; font-weight:700; letter-spacing:-0.01em; }
-  header .sub{ color:var(--muted); font-size:13px; margin-top:4px; }
+  header h1{ font-size:28px; font-weight:700; letter-spacing:-0.01em; }
+  header .sub{ color:var(--muted); font-size:13.5px; margin-top:6px; line-height:1.5; }
   .ecg{ position:absolute; bottom:0; left:0; right:0; height:28px; opacity:0.5; }
   .ecg path{
     stroke:var(--pulse); stroke-width:1.5; fill:none;
@@ -45,21 +45,21 @@
   }
   @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-  .category{ padding:22px 20px 4px; }
-  .category-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px; }
-  .category-head h2{ font-size:13px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; }
+  .category{ padding:26px 20px 6px; }
+  .category-head{ display:flex; align-items:baseline; gap:8px; justify-content:space-between; margin-bottom:12px; }
+  .category-head h2{ font-size:13px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; display:flex; align-items:center; gap:7px; }
   .category-head .count{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); }
-  .card{ background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
-  .metric-row{ display:flex; align-items:center; gap:12px; padding:13px 14px; border-bottom:1px solid var(--line); }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .metric-row{ display:flex; align-items:center; gap:14px; padding:16px 16px; border-bottom:1px solid var(--line); min-height:44px; }
   .metric-row:last-child{ border-bottom:none; }
   .metric-row .info{ flex:1; min-width:0; }
-  .metric-row .label{ font-size:13.5px; font-weight:500; }
-  .metric-row .date{ font-size:11px; color:var(--muted); margin-top:2px; }
+  .metric-row .label{ font-size:14px; font-weight:500; }
+  .metric-row .date{ font-size:11.5px; color:var(--muted); margin-top:3px; }
   .metric-row .spark{ width:56px; height:24px; flex-shrink:0; }
   .metric-row .valwrap{ text-align:right; flex-shrink:0; min-width:74px; }
-  .metric-row .val{ font-size:15px; font-weight:600; }
+  .metric-row .val{ font-size:16px; font-weight:600; }
   .metric-row .unit{ font-size:10.5px; color:var(--muted); margin-left:2px; }
-  .metric-row .delta{ font-size:10.5px; margin-top:2px; }
+  .metric-row .delta{ font-size:10.5px; margin-top:3px; }
   .delta.up{ color:var(--pulse); }
   .delta.down{ color:var(--red); }
   .delta.flat{ color:var(--muted); }
@@ -67,17 +67,17 @@
   .stale-badge{
     display:inline-block; font-size:9.5px; font-family:'IBM Plex Mono',monospace;
     color:var(--muted); border:1px solid var(--line); border-radius:4px;
-    padding:1px 5px; margin-left:6px; vertical-align:middle;
+    padding:2px 6px; margin-left:6px; vertical-align:middle;
   }
-  footer{ text-align:center; padding:24px 20px; color:var(--muted); font-size:11px; }
+  footer{ text-align:center; padding:28px 20px; color:var(--muted); font-size:11px; }
 </style>
 </head>
 <body>
-<style>.hub-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#0D1110;border-bottom:1px solid #2A332F;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;position:sticky;top:0;z-index:50}.hub-nav a{color:#4FD9AE;text-decoration:none}.hub-nav .hub-nav-title{color:#8CA39A}</style>
+<style>.hub-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;min-height:44px;background:#0D1110;border-bottom:1px solid #2A332F;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;position:sticky;top:0;z-index:50}.hub-nav a{color:#4FD9AE;text-decoration:none;display:flex;align-items:center;gap:4px;padding:6px 8px;margin:-6px -8px;font-weight:600}.hub-nav .hub-nav-title{color:#8CA39A;font-size:11px}</style>
 <div class="hub-nav"><a href="https://aaronlikeshoobs.github.io/fitness-hub/">&larr; Hub</a><span class="hub-nav-title">Vitals Log</span></div>
 
 <header>
-  <div class="eyebrow">Started 25 Jul 2026 · Auto-synced daily</div>
+  <div class="eyebrow">🫀 Started 25 Jul 2026 · Auto-synced daily</div>
   <h1>Vitals Log</h1>
   <div class="sub">Body composition, daily activity &amp; cycling output — tracked over time</div>
   <svg class="ecg" viewBox="0 0 400 28" preserveAspectRatio="none">
@@ -86,9 +86,16 @@
 </header>
 
 <div id="app"><div class="loading">Loading…</div></div>
-<footer>Synced from Apple Health via Health Auto Export → Google Drive → GitHub Actions</footer>
+<footer>🔄 Synced from Apple Health via Health Auto Export → Google Drive → GitHub Actions</footer>
 
 <script>
+const CATEGORY_ICONS = {
+  'Body Composition': '⚖️',
+  'Daily Activity': '👣',
+  'Point-in-Time': '🎯',
+  'Cycling': '🚴',
+};
+
 const METRICS = [
   {id:'weight', label:'Weight', unit:'lb', cat:'Body Composition', auto:true},
   {id:'bmi', label:'BMI', unit:'', cat:'Body Composition', auto:true},
@@ -151,7 +158,7 @@ function render(store){
   let html = '';
   categories.forEach(cat => {
     const metrics = METRICS.filter(m => m.cat === cat);
-    html += `<div class="category"><div class="category-head"><h2>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
+    html += `<div class="category"><div class="category-head"><h2><span>${CATEGORY_ICONS[cat] || ''}</span>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
     metrics.forEach(m => {
       const hist = (store[m.id] || []).slice().sort((a,b) => a.date.localeCompare(b.date));
       const latest = hist[hist.length-1];
