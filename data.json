@@ -14,17 +14,8 @@
     {"date": "2026-07-14", "value": 13.47},
     {"date": "2026-07-25", "value": 11.0}
   ],
-  "muscle_mass": [
-    {"date": "2026-07-25", "value": 138.6}
-  ],
   "lean_mass": [
     {"date": "2026-07-25", "value": 145.2}
-  ],
-  "bone_mass": [
-    {"date": "2026-07-25", "value": 6.5}
-  ],
-  "water_mass": [
-    {"date": "2026-07-25", "value": 93.3}
   ],
   "steps": [
     {"date": "2026-07-25", "value": 5025.57}
