@@ -1,0 +1,74 @@
+{
+  "weight": [
+    {"date": "2026-07-13", "value": 168.88},
+    {"date": "2026-07-14", "value": 167.77},
+    {"date": "2026-07-25", "value": 167.8}
+  ],
+  "bmi": [
+    {"date": "2026-07-13", "value": 24.96},
+    {"date": "2026-07-14", "value": 24.79},
+    {"date": "2026-07-25", "value": 24.4}
+  ],
+  "fat_mass": [
+    {"date": "2026-07-13", "value": 10.9},
+    {"date": "2026-07-14", "value": 13.47},
+    {"date": "2026-07-25", "value": 11.0}
+  ],
+  "muscle_mass": [
+    {"date": "2026-07-25", "value": 138.6}
+  ],
+  "lean_mass": [
+    {"date": "2026-07-25", "value": 145.2}
+  ],
+  "bone_mass": [
+    {"date": "2026-07-25", "value": 6.5}
+  ],
+  "water_mass": [
+    {"date": "2026-07-25", "value": 93.3}
+  ],
+  "steps": [
+    {"date": "2026-07-25", "value": 5025.57}
+  ],
+  "distance": [
+    {"date": "2026-07-25", "value": 2.65}
+  ],
+  "active_energy": [
+    {"date": "2026-07-25", "value": 387.14}
+  ],
+  "exercise_time": [
+    {"date": "2026-07-25", "value": 35.86}
+  ],
+  "flights": [
+    {"date": "2026-07-25", "value": 8.43}
+  ],
+  "walking_speed": [
+    {"date": "2026-07-25", "value": 2.64}
+  ],
+  "resting_hr": [
+    {"date": "2026-07-25", "value": 60.43}
+  ],
+  "hrv": [
+    {"date": "2026-07-25", "value": 51.11}
+  ],
+  "vo2max": [
+    {"date": "2026-07-20", "value": 45.2}
+  ],
+  "cardio_recovery": [
+    {"date": "2026-07-17", "value": 32.3}
+  ],
+  "six_min_walk": [
+    {"date": "2026-07-21", "value": 500}
+  ],
+  "cyc_distance": [
+    {"date": "2026-07-01", "value": 7.76}
+  ],
+  "cyc_speed": [
+    {"date": "2026-07-01", "value": 16.51}
+  ],
+  "cyc_power": [
+    {"date": "2026-07-01", "value": 110.84}
+  ],
+  "cyc_cadence": [
+    {"date": "2026-07-01", "value": 89.7}
+  ]
+}
