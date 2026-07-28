@@ -1,0 +1,11 @@
+{
+  "name": "Vitals Log",
+  "short_name": "Vitals Log",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0D1110",
+  "theme_color": "#0D1110",
+  "icons": [
+    { "src": "apple-touch-icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
