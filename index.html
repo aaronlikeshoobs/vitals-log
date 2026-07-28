@@ -56,6 +56,8 @@
   .metric-row .label{ font-size:14px; font-weight:500; }
   .metric-row .date{ font-size:11.5px; color:var(--muted); margin-top:3px; }
   .metric-row .spark{ width:56px; height:24px; flex-shrink:0; }
+  .spark-wrap{ display:flex; flex-direction:column; align-items:center; gap:1px; flex-shrink:0; }
+  .spark-range{ font-size:8px; color:var(--muted); white-space:nowrap; letter-spacing:0.01em; }
   .metric-row .valwrap{ text-align:right; flex-shrink:0; min-width:74px; }
   .metric-row .val{ font-size:16px; font-weight:600; }
   .metric-row .unit{ font-size:10.5px; color:var(--muted); margin-left:2px; }
@@ -199,11 +201,11 @@ function deltaClass(delta, dir){
   return improving ? 'up' : 'down';
 }
 
-function sparkSVG(history){
+function sparkSVG(history, roundInt){
   const cutoff = history.length ? shiftDate(history[history.length-1].date, -27) : null;
   const windowed = cutoff ? history.filter(h => h.date >= cutoff) : history;
   if(windowed.length < 2){
-    return `<svg class="spark" viewBox="0 0 56 24"><line x1="0" y1="12" x2="56" y2="12" stroke="#2A3238" stroke-width="1.5"/></svg>`;
+    return { svg: `<svg class="spark" viewBox="0 0 56 24"><line x1="0" y1="12" x2="56" y2="12" stroke="#2A3238" stroke-width="1.5"/></svg>`, rangeLabel: null };
   }
   const vals = windowed.map(h => h.value);
   const min = Math.min(...vals), max = Math.max(...vals);
@@ -214,7 +216,11 @@ function sparkSVG(history){
     return `${x},${y}`;
   }).join(' ');
   // Neutral color always — direction-aware color lives in the delta text below, not the sparkline.
-  return `<svg class="spark" viewBox="0 0 56 24"><polyline points="${pts}" fill="none" stroke="#4FD9AE" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/></svg>`;
+  const svg = `<svg class="spark" viewBox="0 0 56 24"><polyline points="${pts}" fill="none" stroke="#4FD9AE" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/></svg>`;
+  // The line is auto-scaled to fill the box regardless of how big the swing actually is —
+  // this label is what tells you whether that swing is 2 units or 20.
+  const rangeLabel = min === max ? null : `${fmtNum(min, roundInt)}\u2013${fmtNum(max, roundInt)}`;
+  return { svg, rangeLabel };
 }
 
 function bigChartSVG(hist, trainingDates){
@@ -266,6 +272,7 @@ function metricRowHtml(m, store, trainingDates){
   const stale = latest && daysSince(latest.date) > 14 ? `<span class="stale-badge">STALE</span>` : '';
   const isPartial = m.cumulative && latest && latest.date === todayStr();
   const dateLabel = latest ? fmtDate(latest.date) + (isPartial ? ' · partial' : '') : '—';
+  const spark = sparkSVG(hist, m.roundInt);
   const isOpen = expandedId === m.id;
   let html = `
     <div class="metric-row" data-id="${m.id}">
@@ -273,7 +280,7 @@ function metricRowHtml(m, store, trainingDates){
         <div class="label">${m.label}${stale}</div>
         <div class="date mono">${dateLabel}</div>
       </div>
-      ${sparkSVG(hist)}
+      <div class="spark-wrap">${spark.svg}${spark.rangeLabel ? `<div class="spark-range mono">${spark.rangeLabel}</div>` : ''}</div>
       <div class="valwrap">
         <div class="val mono">${latest ? fmtNum(latest.value, m.roundInt) : '—'}<span class="unit">${m.unit}</span></div>
         ${deltaHTML}
