@@ -82,6 +82,8 @@
   .detail-row{ display:flex; justify-content:space-between; padding:5px 2px; font-size:11.5px; color:var(--muted); border-bottom:1px solid var(--line); }
   .detail-row:last-child{ border-bottom:none; }
   .detail-row span:last-child{ color:var(--text); }
+  .chart-legend{ display:flex; align-items:center; gap:6px; font-size:10.5px; color:var(--muted); margin-top:2px; font-family:'IBM Plex Mono',monospace; }
+  .legend-tick{ width:2px; height:10px; background:#F2C94C; border-radius:1px; display:inline-block; }
 </style>
 </head>
 <body>
@@ -215,7 +217,7 @@ function sparkSVG(history){
   return `<svg class="spark" viewBox="0 0 56 24"><polyline points="${pts}" fill="none" stroke="#4FD9AE" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/></svg>`;
 }
 
-function bigChartSVG(hist){
+function bigChartSVG(hist, trainingDates){
   const W = 320, H = 110, PAD = 22;
   const vals = hist.map(pt => pt.value);
   const min = Math.min(...vals), max = Math.max(...vals);
@@ -223,27 +225,34 @@ function bigChartSVG(hist){
   const coords = hist.map((pt, i) => ({
     x: PAD + (i / (hist.length - 1 || 1)) * (W - PAD*2),
     y: (H - PAD) - ((pt.value - min) / range) * (H - PAD*2),
+    date: pt.date,
   }));
   const pointsStr = coords.map(c => `${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(' ');
+  const markers = (trainingDates && trainingDates.size) ? coords.filter(c => trainingDates.has(c.date)) : [];
   return `
     <svg viewBox="0 0 ${W} ${H+16}" width="100%" height="${H+16}">
       <polyline points="${pointsStr}" fill="none" stroke="#4FD9AE" stroke-width="2"/>
       ${coords.map(c => `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2.5" fill="#4FD9AE"/>`).join('')}
+      ${markers.map(c => `<line x1="${c.x.toFixed(1)}" y1="${(H-PAD+4).toFixed(1)}" x2="${c.x.toFixed(1)}" y2="${(H+1).toFixed(1)}" stroke="#F2C94C" stroke-width="2" stroke-linecap="round"/>`).join('')}
       <text x="${PAD}" y="${H+14}" font-size="10" fill="#8CA39A">${fmtDate(hist[0].date)}</text>
       <text x="${W-PAD}" y="${H+14}" font-size="10" fill="#8CA39A" text-anchor="end">${fmtDate(hist[hist.length-1].date)}</text>
-    </svg>`;
+    </svg>
+    ${markers.length ? `<div class="chart-legend"><span class="legend-tick"></span>training day logged</div>` : ''}`;
 }
 
-function detailPanel(m, hist){
+function detailPanel(m, hist, trainingDates){
   if (hist.length < 2) {
     return `<div class="detail-panel"><div class="detail-empty">Not enough history yet for a chart.</div></div>`;
   }
   const recent = hist.slice(-14).slice().reverse();
-  const rows = recent.map(pt => `<div class="detail-row"><span class="mono">${fmtDate(pt.date)}</span><span class="mono">${fmtNum(pt.value, m.roundInt)}${m.unit}</span></div>`).join('');
-  return `<div class="detail-panel">${bigChartSVG(hist)}<div class="detail-list">${rows}</div></div>`;
+  const rows = recent.map(pt => {
+    const trained = trainingDates && trainingDates.has(pt.date);
+    return `<div class="detail-row"><span class="mono">${fmtDate(pt.date)}${trained ? ' 🏋️' : ''}</span><span class="mono">${fmtNum(pt.value, m.roundInt)}${m.unit}</span></div>`;
+  }).join('');
+  return `<div class="detail-panel">${bigChartSVG(hist, trainingDates)}<div class="detail-list">${rows}</div></div>`;
 }
 
-function metricRowHtml(m, store){
+function metricRowHtml(m, store, trainingDates){
   const hist = (store[m.id] || []).slice().sort((a,b) => a.date.localeCompare(b.date));
   const latest = hist[hist.length-1];
   const comp = comparisonFor(m, hist);
@@ -271,7 +280,7 @@ function metricRowHtml(m, store){
       </div>
       <span class="chev">${isOpen ? '▲' : '▼'}</span>
     </div>`;
-  if (isOpen) html += detailPanel(m, hist);
+  if (isOpen) html += detailPanel(m, hist, trainingDates);
   return html;
 }
 
@@ -292,6 +301,17 @@ function readinessSummary(store){
   return { icon: '⚠️', text: `${flags.join('; ')}. Might be worth an easier session — <a href="https://aaronlikeshoobs.github.io/workout-log/">check Training Log</a>.` };
 }
 
+let TRAINING_DATES = new Set();
+
+// Only dates workout-log actually stamped via updatedAt count — no guessing at historical dates.
+function buildTrainingDates(workoutData){
+  const dates = new Set();
+  Object.values(workoutData || {}).forEach((log) => {
+    if (log && log.updatedAt) dates.add(log.updatedAt);
+  });
+  return dates;
+}
+
 function render(store){
   STORE = store;
   const app = document.getElementById('app');
@@ -303,14 +323,14 @@ function render(store){
 
   const keyMetrics = KEY_METRIC_IDS.map(id => METRICS.find(m => m.id === id)).filter(Boolean);
   html += `<div class="category"><div class="category-head"><h2><span>🔑</span>Key Metrics</h2></div><div class="card">`;
-  keyMetrics.forEach(m => { html += metricRowHtml(m, store); });
+  keyMetrics.forEach(m => { html += metricRowHtml(m, store, TRAINING_DATES); });
   html += `</div></div>`;
 
   const categories = [...new Set(METRICS.map(m => m.cat))];
   categories.forEach(cat => {
     const metrics = METRICS.filter(m => m.cat === cat);
     html += `<div class="category"><div class="category-head"><h2><span>${CATEGORY_ICONS[cat] || ''}</span>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
-    metrics.forEach(m => { html += metricRowHtml(m, store); });
+    metrics.forEach(m => { html += metricRowHtml(m, store, TRAINING_DATES); });
     html += `</div></div>`;
   });
 
@@ -325,12 +345,20 @@ document.getElementById('app').addEventListener('click', (e) => {
   render(STORE);
 });
 
-fetch('./data.json', {cache: 'no-store'})
-  .then(r => {
+Promise.all([
+  fetch('./data.json', {cache: 'no-store'}).then(r => {
     if(!r.ok) throw new Error('data.json not found');
     return r.json();
+  }),
+  // Same-origin GitHub Pages fetch — cross-app, non-critical: overlay just skips if this fails.
+  fetch('https://aaronlikeshoobs.github.io/workout-log/data.json', {cache: 'no-store'})
+    .then(r => r.ok ? r.json() : {})
+    .catch(() => ({})),
+])
+  .then(([store, workoutData]) => {
+    TRAINING_DATES = buildTrainingDates(workoutData);
+    render(store);
   })
-  .then(render)
   .catch(err => {
     document.getElementById('app').innerHTML =
       `<div class="error">Couldn't load data.json — ${err.message}</div>`;
