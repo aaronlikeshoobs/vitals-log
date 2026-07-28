@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-Pulls the latest Health Auto Export JSON files from a Google Drive folder,
-extracts fitness + body-composition metrics, and merges them into data.json
-in this repo. Designed to run on a schedule via GitHub Actions.
+Pulls the latest Health Auto Export JSON files from two Google Drive folders —
+one for daily health metrics, one for individual workout sessions — extracts
+what's useful, and merges it into data.json in this repo. Runs on a schedule
+via GitHub Actions.
 
-Auth: service account JSON provided via GDRIVE_SA_KEY env var (the folder
-must be shared with the service account's client_email as Viewer).
+Auth: service account JSON provided via GDRIVE_SA_KEY env var. BOTH folders
+must be shared with the service account's client_email as Viewer — they are
+two separate Drive folders (Health Auto Export created a second one with the
+same name for the workouts export job), not one shared folder.
 """
 
 import json
@@ -18,12 +21,16 @@ from statistics import mean
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-DRIVE_FOLDER_ID = "1OfrLtiSMFNm7z2PFO4bzbPNLyFMkSPAt"  # HealthAutoExport folder
+METRICS_FOLDER_ID = "1OfrLtiSMFNm7z2PFO4bzbPNLyFMkSPAt"   # HealthAutoExport (daily metrics)
+WORKOUTS_FOLDER_ID = "1XGde6wlCPZBFtWcKlA3Ks-lOsM2i3T6H"  # HealthAutoExport (workout sessions)
 DATA_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data.json")
 LOOKBACK_DAYS = 10  # how many days of exported files to pull each run
 
+KM_TO_MI = 0.621371
+M_TO_FT = 3.28084
+
 # Map Health Auto Export metric name -> (our internal id, aggregation)
-# aggregation: "daily_avg" = one avg-per-day entry, "point" = each raw sample is its own entry
+# aggregation: "daily_avg"/"daily_sum" = one entry per day, "point" = each raw sample is its own entry
 METRIC_MAP = {
     "step_count": ("steps", "daily_sum"),
     "walking_running_distance": ("distance", "daily_sum"),
@@ -59,9 +66,9 @@ def get_drive_service():
     return build("drive", "v3", credentials=creds)
 
 
-def list_recent_files(service, since_iso):
+def list_recent_files(service, folder_id, since_iso):
     query = (
-        f"'{DRIVE_FOLDER_ID}' in parents and "
+        f"'{folder_id}' in parents and "
         f"mimeType='text/json' and "
         f"modifiedTime > '{since_iso}'"
     )
@@ -88,7 +95,7 @@ def download_json(service, file_id):
 
 def parse_date(date_str):
     # "2026-07-27 08:00:00 -0700" -> "2026-07-27"
-    return date_str.split(" ")[0]
+    return date_str.split(" ")[0] if date_str else None
 
 
 def merge_point(store, metric_id, date, value):
@@ -100,6 +107,41 @@ def merge_point(store, metric_id, date, value):
     entries.append({"date": date, "value": value})
 
 
+def merge_workout(store, summary):
+    entries = store.setdefault("workouts", [])
+    for i, e in enumerate(entries):
+        if e["id"] == summary["id"]:
+            entries[i] = summary
+            return
+    entries.append(summary)
+
+
+def qty(field_dict):
+    return field_dict.get("qty") if isinstance(field_dict, dict) else None
+
+
+def extract_workout_summary(w):
+    dist_km = qty(w.get("distance"))
+    elev_m = qty(w.get("elevationUp"))
+    avg_hr = qty(w.get("avgHeartRate"))
+    max_hr = qty(w.get("maxHeartRate"))
+    calories = qty(w.get("activeEnergyBurned")) or qty(w.get("totalEnergy"))
+    duration_s = w.get("duration")
+    return {
+        "id": w.get("id"),
+        "date": parse_date(w.get("start", "")),
+        "start": w.get("start"),
+        "end": w.get("end"),
+        "name": w.get("name"),
+        "duration_min": round(duration_s / 60, 1) if duration_s is not None else None,
+        "distance_mi": round(dist_km * KM_TO_MI, 2) if dist_km is not None else None,
+        "calories": round(calories) if calories is not None else None,
+        "avg_hr": round(avg_hr) if avg_hr is not None else None,
+        "max_hr": round(max_hr) if max_hr is not None else None,
+        "elevation_ft": round(elev_m * M_TO_FT) if elev_m is not None else None,
+    }
+
+
 def load_existing_data():
     if os.path.exists(DATA_JSON_PATH):
         with open(DATA_JSON_PATH) as f:
@@ -108,26 +150,21 @@ def load_existing_data():
 
 
 def save_data(store):
-    for metric_id in store:
-        store[metric_id].sort(key=lambda e: e["date"])
+    for key in store:
+        store[key].sort(key=lambda e: e.get("date") or "")
     with open(DATA_JSON_PATH, "w") as f:
         json.dump(store, f, indent=2)
 
 
-def main():
-    service = get_drive_service()
-    since = (datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)).isoformat()
-    files = list_recent_files(service, since)
-
+def sync_metrics(service, since_iso, store):
+    files = list_recent_files(service, METRICS_FOLDER_ID, since_iso)
     if not files:
-        print("No recent export files found.")
+        print("No recent metrics export files found.")
         return
+    print(f"Found {len(files)} recent metrics export file(s).")
 
-    print(f"Found {len(files)} recent export file(s).")
-
-    # daily_raw[metric_name][date] = list of qty values seen that day
     daily_raw = {}
-    point_raw = {}  # metric_name -> {date: value}  (last-write-wins across files)
+    point_raw = {}
 
     for f in files:
         print(f"  Processing {f['name']}...")
@@ -144,37 +181,59 @@ def main():
                 continue
             _, agg = METRIC_MAP[name]
             for pt in m.get("data", []):
-                qty = pt.get("qty")
+                q = pt.get("qty")
                 date_field = pt.get("date") or pt.get("start")
-                if qty is None or not date_field:
+                if q is None or not date_field:
                     continue
                 day = parse_date(date_field)
                 if agg == "point":
-                    prev = point_raw.setdefault(name, {})
-                    prev[day] = qty  # last one wins (files are processed in listing order)
+                    point_raw.setdefault(name, {})[day] = q
                 else:
-                    daily_raw.setdefault(name, {}).setdefault(day, []).append(qty)
+                    daily_raw.setdefault(name, {}).setdefault(day, []).append(q)
 
-    store = load_existing_data()
-
-    # Point-in-time metrics: one entry per day seen
     for name, by_day in point_raw.items():
         metric_id, _ = METRIC_MAP[name]
         for day, value in by_day.items():
             merge_point(store, metric_id, day, round(value, 2))
 
-    # Daily aggregate metrics
     for name, by_day in daily_raw.items():
         metric_id, agg = METRIC_MAP[name]
         for day, values in by_day.items():
-            if agg == "daily_sum":
-                value = sum(values)
-            else:  # daily_avg
-                value = mean(values)
+            value = sum(values) if agg == "daily_sum" else mean(values)
             merge_point(store, metric_id, day, round(value, 2))
 
+
+def sync_workouts(service, since_iso, store):
+    files = list_recent_files(service, WORKOUTS_FOLDER_ID, since_iso)
+    if not files:
+        print("No recent workout export files found.")
+        return
+    print(f"Found {len(files)} recent workout export file(s).")
+
+    for f in files:
+        print(f"  Processing {f['name']}...")
+        try:
+            content = download_json(service, f["id"])
+        except Exception as e:
+            print(f"    Failed to download/parse {f['name']}: {e}", file=sys.stderr)
+            continue
+
+        workouts = content.get("data", {}).get("workouts", [])
+        for w in workouts:
+            summary = extract_workout_summary(w)
+            if summary["date"] and summary["id"]:
+                merge_workout(store, summary)
+
+
+def main():
+    service = get_drive_service()
+    since = (datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)).isoformat()
+
+    store = load_existing_data()
+    sync_metrics(service, since, store)
+    sync_workouts(service, since, store)
     save_data(store)
-    print(f"data.json updated with metrics: {sorted(store.keys())}")
+    print(f"data.json updated with keys: {sorted(store.keys())}")
 
 
 if __name__ == "__main__":
