@@ -24,7 +24,7 @@
     --red:#FF6B6B;
   }
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
-  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased; touch-action:manipulation;}
+  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased; touch-action:manipulation; overflow-anchor:none;}
   body{padding-bottom:70px;}
   .mono{font-family:'IBM Plex Mono',monospace;}
 
@@ -419,6 +419,7 @@ Promise.all([
   .then(([store, workoutData]) => {
     TRAINING_DATES = buildTrainingDates(workoutData);
     render(store);
+    window.scrollTo(0, 0); // real content just rendered for the first time — reset scroll now, not before
   })
   .catch(err => {
     document.getElementById('app').innerHTML =
