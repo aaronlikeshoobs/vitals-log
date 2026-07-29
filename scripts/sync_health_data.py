@@ -16,6 +16,7 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from statistics import mean
 
 from google.oauth2 import service_account
@@ -225,7 +226,23 @@ def sync_workouts(service, since_iso, store):
                 merge_workout(store, summary)
 
 
+# Cron fires every hour in UTC (that trigger never needs to change). This is the DST-aware
+# filter that decides whether "now" actually falls in the desired Pacific-time sync window —
+# zoneinfo resolves America/Los_Angeles against the real IANA tz database, so PDT/PST
+# transitions are handled correctly with no manual updates, ever.
+SYNC_HOURS_PACIFIC = {7, 9, 11, 13, 15, 17, 19, 21}
+
+
+def should_run_now():
+    pacific_hour = datetime.now(ZoneInfo("America/Los_Angeles")).hour
+    return pacific_hour in SYNC_HOURS_PACIFIC
+
+
 def main():
+    if not should_run_now():
+        print("Outside the configured Pacific-time sync window — skipping this run.")
+        return
+
     service = get_drive_service()
     since = (datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)).isoformat()
 
