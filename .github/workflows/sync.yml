@@ -2,8 +2,9 @@ name: Sync Health Data
 
 on:
   schedule:
-    # 13:00 UTC = 6am/5am Pacific depending on DST — after overnight sync, before the day starts
-    - cron: "0 13 * * *"
+    # Fires every hour, always — the DST-aware Pacific-time window check lives in the
+    # script itself (should_run_now()), so this line never needs touching again.
+    - cron: "0 * * * *"
   workflow_dispatch: {}
 
 permissions:
