@@ -194,7 +194,7 @@
     },
     {
       "date": "2026-07-29",
-      "value": 104.56
+      "value": 1675.56
     }
   ],
   "distance": [
@@ -320,7 +320,7 @@
     },
     {
       "date": "2026-07-29",
-      "value": 0.05
+      "value": 0.82
     }
   ],
   "active_energy": [
@@ -414,7 +414,7 @@
     },
     {
       "date": "2026-07-29",
-      "value": 4.49
+      "value": 278.19
     }
   ],
   "exercise_time": [
@@ -504,7 +504,7 @@
     },
     {
       "date": "2026-07-29",
-      "value": 1
+      "value": 38
     }
   ],
   "flights": [
@@ -599,6 +599,10 @@
     {
       "date": "2026-07-28",
       "value": 36.67
+    },
+    {
+      "date": "2026-07-29",
+      "value": 1.79
     }
   ],
   "walking_speed": [
@@ -713,6 +717,10 @@
     {
       "date": "2026-07-28",
       "value": 2.73
+    },
+    {
+      "date": "2026-07-29",
+      "value": 2.55
     }
   ],
   "resting_hr": [
@@ -799,6 +807,10 @@
     {
       "date": "2026-07-28",
       "value": 54
+    },
+    {
+      "date": "2026-07-29",
+      "value": 50
     }
   ],
   "hrv": [
@@ -889,6 +901,10 @@
     {
       "date": "2026-07-28",
       "value": 41.13
+    },
+    {
+      "date": "2026-07-29",
+      "value": 57.68
     }
   ],
   "vo2max": [
@@ -1106,6 +1122,19 @@
       "avg_hr": 100,
       "max_hr": 136,
       "elevation_ft": 193
+    },
+    {
+      "id": "B7C086E3-5C81-497D-979E-30498FC1861D",
+      "date": "2026-07-29",
+      "start": "2026-07-29 08:17:09 -0700",
+      "end": "2026-07-29 08:52:43 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 35.6,
+      "distance_mi": null,
+      "calories": 224,
+      "avg_hr": 119,
+      "max_hr": 157,
+      "elevation_ft": null
     }
   ]
 }
