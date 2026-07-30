@@ -48,10 +48,11 @@ METRIC_MAP = {
     "body_mass_index": ("bmi", "point"),
     "body_fat_percentage": ("fat_mass", "point"),
     "lean_body_mass": ("lean_mass", "point"),
-    "cycling_distance": ("cyc_distance", "point"),
-    "cycling_speed": ("cyc_speed", "point"),
-    "cycling_power": ("cyc_power", "point"),
-    "cycling_cadence": ("cyc_cadence", "point"),
+    # cycling_distance/speed/power/cadence intentionally not synced — confirmed via raw
+    # export inspection that Peloton doesn't populate them for this user (indoor rides),
+    # and the one time they did appear the values were internally inconsistent (GPS noise
+    # from an indoor session, not a real reading). The Workouts feed is the reliable source
+    # for cycling activity now.
 }
 
 
@@ -108,12 +109,46 @@ def merge_point(store, metric_id, date, value):
     entries.append({"date": date, "value": value})
 
 
+def _parse_start(start_str):
+    try:
+        # "2026-07-28 08:15:28 -0700" -> tz-aware datetime
+        return datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S %z")
+    except (ValueError, TypeError):
+        return None
+
+
+def _richness(summary):
+    # how many informative fields are actually filled in — used to pick the better
+    # of two duplicate records for the same real-world session
+    fields = ["distance_mi", "calories", "avg_hr", "max_hr", "elevation_ft", "duration_min"]
+    return sum(1 for f in fields if summary.get(f) is not None)
+
+
 def merge_workout(store, summary):
     entries = store.setdefault("workouts", [])
     for i, e in enumerate(entries):
         if e["id"] == summary["id"]:
             entries[i] = summary
             return
+
+    # The same real session can get logged twice under different HealthKit ids when
+    # more than one source records it (e.g. Peloton's own app AND a paired Apple Watch
+    # both write a workout for the same ride). Treat same-name entries starting within
+    # 5 minutes of each other as one real session and keep whichever record has more
+    # data filled in, rather than showing both.
+    new_start = _parse_start(summary.get("start"))
+    if new_start and summary.get("name"):
+        for i, e in enumerate(entries):
+            if e.get("name") != summary.get("name"):
+                continue
+            existing_start = _parse_start(e.get("start"))
+            if not existing_start:
+                continue
+            if abs((new_start - existing_start).total_seconds()) <= 300:
+                if _richness(summary) > _richness(e):
+                    entries[i] = summary
+                return  # duplicate either way — don't append a second entry
+
     entries.append(summary)
 
 
