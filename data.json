@@ -981,60 +981,7 @@
       "value": 500
     }
   ],
-  "cyc_distance": [
-    {
-      "date": "2026-07-01",
-      "value": 2.46
-    },
-    {
-      "date": "2026-07-28",
-      "value": 0.04
-    }
-  ],
-  "cyc_speed": [
-    {
-      "date": "2026-07-01",
-      "value": 16.1
-    },
-    {
-      "date": "2026-07-28",
-      "value": 14.26
-    }
-  ],
-  "cyc_power": [
-    {
-      "date": "2026-07-01",
-      "value": 102.65
-    },
-    {
-      "date": "2026-07-28",
-      "value": 73.57
-    }
-  ],
-  "cyc_cadence": [
-    {
-      "date": "2026-07-01",
-      "value": 88.04
-    },
-    {
-      "date": "2026-07-28",
-      "value": 97.43
-    }
-  ],
   "workouts": [
-    {
-      "id": "103DF08A-1C9E-4C9E-A9C0-AEDF11201516",
-      "date": "2026-07-25",
-      "start": "2026-07-25 16:44:07 -0700",
-      "end": "2026-07-25 17:08:34 -0700",
-      "name": "Hiking",
-      "duration_min": 24.4,
-      "distance_mi": 1.14,
-      "calories": 118,
-      "avg_hr": 93,
-      "max_hr": 123,
-      "elevation_ft": 203
-    },
     {
       "id": "D87000BB-7B57-4233-BB5D-C7284CED04C2",
       "date": "2026-07-25",
@@ -1047,6 +994,19 @@
       "avg_hr": 105,
       "max_hr": 138,
       "elevation_ft": 200
+    },
+    {
+      "id": "103DF08A-1C9E-4C9E-A9C0-AEDF11201516",
+      "date": "2026-07-25",
+      "start": "2026-07-25 16:44:07 -0700",
+      "end": "2026-07-25 17:08:34 -0700",
+      "name": "Hiking",
+      "duration_min": 24.4,
+      "distance_mi": 1.14,
+      "calories": 118,
+      "avg_hr": 93,
+      "max_hr": 123,
+      "elevation_ft": 203
     },
     {
       "id": "C6A84C8D-D794-4D3A-A2DC-AD324150D4A4",
@@ -1062,6 +1022,19 @@
       "elevation_ft": 92
     },
     {
+      "id": "C73FF71E-263D-4B37-918F-AEDD883F3374",
+      "date": "2026-07-27",
+      "start": "2026-07-27 08:11:29 -0700",
+      "end": "2026-07-27 08:49:26 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 38.0,
+      "distance_mi": null,
+      "calories": 153,
+      "avg_hr": 89,
+      "max_hr": 116,
+      "elevation_ft": null
+    },
+    {
       "id": "C9FF17BB-E0F5-4D6F-B577-9C4AA908BB91",
       "date": "2026-07-27",
       "start": "2026-07-27 13:13:23 -0700",
@@ -1075,16 +1048,29 @@
       "elevation_ft": 386
     },
     {
-      "id": "C73FF71E-263D-4B37-918F-AEDD883F3374",
-      "date": "2026-07-27",
-      "start": "2026-07-27 08:11:29 -0700",
-      "end": "2026-07-27 08:49:26 -0700",
+      "id": "C0A0248C-EE27-4FAD-A27A-4F67FFFDD3A2",
+      "date": "2026-07-28",
+      "start": "2026-07-28 08:15:11 -0700",
+      "end": "2026-07-28 08:45:11 -0700",
+      "name": "Indoor Cycling",
+      "duration_min": 30.0,
+      "distance_mi": 7.84,
+      "calories": 230,
+      "avg_hr": 107,
+      "max_hr": 135,
+      "elevation_ft": null
+    },
+    {
+      "id": "4019A844-1AE5-4D40-AA61-0018E3BA1040",
+      "date": "2026-07-28",
+      "start": "2026-07-28 08:47:31 -0700",
+      "end": "2026-07-28 09:04:56 -0700",
       "name": "Traditional Strength Training",
-      "duration_min": 38.0,
+      "duration_min": 17.4,
       "distance_mi": null,
-      "calories": 153,
+      "calories": 74,
       "avg_hr": 89,
-      "max_hr": 116,
+      "max_hr": 100,
       "elevation_ft": null
     },
     {
@@ -1101,32 +1087,6 @@
       "elevation_ft": 210
     },
     {
-      "id": "4019A844-1AE5-4D40-AA61-0018E3BA1040",
-      "date": "2026-07-28",
-      "start": "2026-07-28 08:47:31 -0700",
-      "end": "2026-07-28 09:04:56 -0700",
-      "name": "Traditional Strength Training",
-      "duration_min": 17.4,
-      "distance_mi": null,
-      "calories": 74,
-      "avg_hr": 89,
-      "max_hr": 100,
-      "elevation_ft": null
-    },
-    {
-      "id": "3F7E95D9-7488-4350-A5DA-47B0B4AD90C7",
-      "date": "2026-07-28",
-      "start": "2026-07-28 08:15:28 -0700",
-      "end": "2026-07-28 08:45:18 -0700",
-      "name": "Indoor Cycling",
-      "duration_min": 29.8,
-      "distance_mi": null,
-      "calories": 157,
-      "avg_hr": 107,
-      "max_hr": 135,
-      "elevation_ft": null
-    },
-    {
       "id": "C22E2319-5A34-4483-8AAD-54810DB541D6",
       "date": "2026-07-28",
       "start": "2026-07-28 18:01:53 -0700",
@@ -1138,19 +1098,6 @@
       "avg_hr": 100,
       "max_hr": 136,
       "elevation_ft": 193
-    },
-    {
-      "id": "C0A0248C-EE27-4FAD-A27A-4F67FFFDD3A2",
-      "date": "2026-07-28",
-      "start": "2026-07-28 08:15:11 -0700",
-      "end": "2026-07-28 08:45:11 -0700",
-      "name": "Indoor Cycling",
-      "duration_min": 30.0,
-      "distance_mi": 7.84,
-      "calories": 230,
-      "avg_hr": 107,
-      "max_hr": 135,
-      "elevation_ft": null
     },
     {
       "id": "B7C086E3-5C81-497D-979E-30498FC1861D",
