@@ -125,7 +125,6 @@ const CATEGORY_ICONS = {
   'Body Composition': '⚖️',
   'Daily Activity': '👣',
   'Point-in-Time': '🎯',
-  'Cycling': '🚴',
 };
 
 // dir: which direction counts as improvement for THIS person's goals — 'up-good' | 'down-good' | 'neutral'.
@@ -151,15 +150,10 @@ const METRICS = [
   {id:'vo2max', label:'VO2 Max', unit:'ml/kg/min', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
   {id:'cardio_recovery', label:'Cardio Recovery', unit:'bpm', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
   {id:'six_min_walk', label:'6-Min Walk Test', unit:'m', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
-
-  {id:'cyc_distance', label:'Ride Distance', unit:'mi', cat:'Cycling', dir:'up-good', compareMode:'latestVsPrevious'},
-  {id:'cyc_speed', label:'Ride Speed', unit:'mph', cat:'Cycling', dir:'up-good', compareMode:'latestVsPrevious'},
-  {id:'cyc_power', label:'Ride Power', unit:'W', cat:'Cycling', dir:'up-good', compareMode:'latestVsPrevious'},
-  {id:'cyc_cadence', label:'Ride Cadence', unit:'rpm', cat:'Cycling', dir:'up-good', compareMode:'latestVsPrevious'},
 ];
 
 // The handful this person actually watches day to day — everything else lives under its category below.
-const KEY_METRIC_IDS = ['weight', 'lean_mass', 'resting_hr', 'hrv', 'vo2max', 'cyc_power'];
+const KEY_METRIC_IDS = ['weight', 'lean_mass', 'resting_hr', 'hrv', 'vo2max'];
 
 let STORE = null;
 let expandedId = null;
