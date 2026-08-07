@@ -1617,8 +1617,8 @@
       "duration_min": 28.9,
       "distance_mi": 1.53,
       "calories": 176,
-      "avg_hr": 120,
-      "max_hr": 145,
+      "avg_hr": 112,
+      "max_hr": 120,
       "elevation_ft": 313
     },
     {
@@ -1630,8 +1630,8 @@
       "duration_min": 24.5,
       "distance_mi": 1.05,
       "calories": 103,
-      "avg_hr": 84,
-      "max_hr": 101,
+      "avg_hr": 91,
+      "max_hr": 132,
       "elevation_ft": 140
     }
   ]
