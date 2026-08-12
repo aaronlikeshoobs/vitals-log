@@ -306,7 +306,11 @@
     },
     {
       "date": "2026-08-10",
-      "value": 6831.88
+      "value": 6903.88
+    },
+    {
+      "date": "2026-08-11",
+      "value": 2621.47
     }
   ],
   "distance": [
@@ -480,7 +484,11 @@
     },
     {
       "date": "2026-08-10",
-      "value": 3.4
+      "value": 3.44
+    },
+    {
+      "date": "2026-08-11",
+      "value": 1.36
     }
   ],
   "active_energy": [
@@ -618,7 +626,11 @@
     },
     {
       "date": "2026-08-10",
-      "value": 818.91
+      "value": 827.52
+    },
+    {
+      "date": "2026-08-11",
+      "value": 491.48
     }
   ],
   "exercise_time": [
@@ -753,6 +765,10 @@
     {
       "date": "2026-08-10",
       "value": 100.0
+    },
+    {
+      "date": "2026-08-11",
+      "value": 62.0
     }
   ],
   "flights": [
@@ -898,7 +914,11 @@
     },
     {
       "date": "2026-08-10",
-      "value": 32.93
+      "value": 33.93
+    },
+    {
+      "date": "2026-08-11",
+      "value": 10.0
     }
   ],
   "walking_speed": [
@@ -1065,6 +1085,10 @@
     {
       "date": "2026-08-10",
       "value": 2.98
+    },
+    {
+      "date": "2026-08-11",
+      "value": 2.55
     }
   ],
   "resting_hr": [
@@ -1199,6 +1223,10 @@
     {
       "date": "2026-08-10",
       "value": 59
+    },
+    {
+      "date": "2026-08-11",
+      "value": 54
     }
   ],
   "hrv": [
@@ -1337,6 +1365,10 @@
     {
       "date": "2026-08-10",
       "value": 39.12
+    },
+    {
+      "date": "2026-08-11",
+      "value": 40.4
     }
   ],
   "vo2max": [
@@ -1892,6 +1924,32 @@
       "avg_hr": 98,
       "max_hr": 108,
       "elevation_ft": 204
+    },
+    {
+      "id": "48C0CF67-2CD5-4687-B9D1-4531050A0FDA",
+      "date": "2026-08-11",
+      "start": "2026-08-11 09:12:44 -0700",
+      "end": "2026-08-11 09:37:34 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 24.8,
+      "distance_mi": null,
+      "calories": 123,
+      "avg_hr": 112,
+      "max_hr": 135,
+      "elevation_ft": null
+    },
+    {
+      "id": "08FDFF1D-BAAA-419B-AB55-0DC4B0E5AF6F",
+      "date": "2026-08-11",
+      "start": "2026-08-11 08:38:37 -0700",
+      "end": "2026-08-11 09:09:09 -0700",
+      "name": "Indoor Cycling",
+      "duration_min": 30.5,
+      "distance_mi": null,
+      "calories": 213,
+      "avg_hr": 122,
+      "max_hr": 147,
+      "elevation_ft": null
     }
   ]
 }
