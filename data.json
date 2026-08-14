@@ -318,7 +318,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 2856.0
+      "value": 4555.05
+    },
+    {
+      "date": "2026-08-14",
+      "value": 1707.03
     }
   ],
   "distance": [
@@ -504,7 +508,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 1.44
+      "value": 2.28
+    },
+    {
+      "date": "2026-08-14",
+      "value": 0.82
     }
   ],
   "active_energy": [
@@ -654,7 +662,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 160.4
+      "value": 464.36
+    },
+    {
+      "date": "2026-08-14",
+      "value": 344.42
     }
   ],
   "exercise_time": [
@@ -800,7 +812,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 25
+      "value": 47
+    },
+    {
+      "date": "2026-08-14",
+      "value": 47
     }
   ],
   "flights": [
@@ -958,7 +974,7 @@
     },
     {
       "date": "2026-08-13",
-      "value": 14.0
+      "value": 17.0
     }
   ],
   "walking_speed": [
@@ -1136,7 +1152,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 2.94
+      "value": 2.7
+    },
+    {
+      "date": "2026-08-14",
+      "value": 1.88
     }
   ],
   "resting_hr": [
@@ -1432,7 +1452,11 @@
     },
     {
       "date": "2026-08-13",
-      "value": 86.86
+      "value": 65.13
+    },
+    {
+      "date": "2026-08-14",
+      "value": 74.17
     }
   ],
   "vo2max": [
@@ -2073,6 +2097,32 @@
       "avg_hr": 113,
       "max_hr": 142,
       "elevation_ft": 210
+    },
+    {
+      "id": "BD8D25FA-782D-47FD-BD76-6A16F7C7E5C7",
+      "date": "2026-08-13",
+      "start": "2026-08-13 16:40:53 -0700",
+      "end": "2026-08-13 16:59:08 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 18.2,
+      "distance_mi": null,
+      "calories": 177,
+      "avg_hr": 143,
+      "max_hr": 168,
+      "elevation_ft": null
+    },
+    {
+      "id": "EFFE6E9E-1516-4FC2-B04D-2530087221AB",
+      "date": "2026-08-14",
+      "start": "2026-08-14 08:21:05 -0700",
+      "end": "2026-08-14 09:07:44 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 46.6,
+      "distance_mi": null,
+      "calories": 310,
+      "avg_hr": 123,
+      "max_hr": 154,
+      "elevation_ft": null
     }
   ]
 }
