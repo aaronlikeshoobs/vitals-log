@@ -48,6 +48,7 @@ METRIC_MAP = {
     "body_mass_index": ("bmi", "point"),
     "body_fat_percentage": ("fat_mass", "point"),
     "lean_body_mass": ("lean_mass", "point"),
+    "alcohol_consumption": ("alcohol", "daily_sum"),
     # cycling_distance/speed/power/cadence intentionally not synced — confirmed via raw
     # export inspection that Peloton doesn't populate them for this user (indoor rides),
     # and the one time they did appear the values were internally inconsistent (GPS noise
