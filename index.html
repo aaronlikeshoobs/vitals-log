@@ -146,6 +146,7 @@ const METRICS = [
   {id:'walking_speed', label:'Walking Speed', unit:'mph', cat:'Daily Activity', dir:'up-good', compareMode:'rolling7'},
   {id:'resting_hr', label:'Resting Heart Rate', unit:'bpm', cat:'Daily Activity', dir:'down-good', compareMode:'rolling7'},
   {id:'hrv', label:'HRV', unit:'ms', cat:'Daily Activity', dir:'up-good', compareMode:'rolling7'},
+  {id:'alcohol', label:'Alcohol', unit:'drinks/day', cat:'Daily Activity', dir:'down-good', compareMode:'rolling7', cumulative:true},
 
   {id:'vo2max', label:'VO2 Max', unit:'ml/kg/min', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
   {id:'cardio_recovery', label:'Cardio Recovery', unit:'bpm', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
