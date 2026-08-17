@@ -366,7 +366,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 275.0
+      "value": 1121.08
     }
   ],
   "distance": [
@@ -568,7 +568,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 0.13
+      "value": 0.53
     }
   ],
   "active_energy": [
@@ -734,7 +734,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 49.29
+      "value": 385.39
     }
   ],
   "exercise_time": [
@@ -896,7 +896,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 6
+      "value": 68
     }
   ],
   "flights": [
@@ -1419,6 +1419,10 @@
     {
       "date": "2026-08-16",
       "value": 60
+    },
+    {
+      "date": "2026-08-17",
+      "value": 53
     }
   ],
   "hrv": [
@@ -2288,6 +2292,19 @@
       "calories": 514,
       "avg_hr": 129,
       "max_hr": 152,
+      "elevation_ft": null
+    },
+    {
+      "id": "FE045EA0-FA64-412A-A4FA-12D995A746F2",
+      "date": "2026-08-17",
+      "start": "2026-08-17 08:10:15 -0700",
+      "end": "2026-08-17 09:18:10 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 67.9,
+      "distance_mi": null,
+      "calories": 366,
+      "avg_hr": 86,
+      "max_hr": 92,
       "elevation_ft": null
     }
   ]
