@@ -366,7 +366,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 1121.08
+      "value": 1492.18
     }
   ],
   "distance": [
@@ -568,7 +568,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 0.53
+      "value": 0.71
     }
   ],
   "active_energy": [
@@ -734,7 +734,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 385.39
+      "value": 432.18
     }
   ],
   "exercise_time": [
@@ -896,7 +896,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 68
+      "value": 69
     }
   ],
   "flights": [
@@ -1067,6 +1067,10 @@
     {
       "date": "2026-08-16",
       "value": 28.0
+    },
+    {
+      "date": "2026-08-17",
+      "value": 3.0
     }
   ],
   "walking_speed": [
@@ -1260,7 +1264,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 2.06
+      "value": 2.25
     }
   ],
   "resting_hr": [
@@ -1588,7 +1592,7 @@
     },
     {
       "date": "2026-08-17",
-      "value": 119.44
+      "value": 90.55
     }
   ],
   "vo2max": [
@@ -2303,8 +2307,8 @@
       "duration_min": 67.9,
       "distance_mi": null,
       "calories": 366,
-      "avg_hr": 86,
-      "max_hr": 92,
+      "avg_hr": 109,
+      "max_hr": 154,
       "elevation_ft": null
     }
   ]
