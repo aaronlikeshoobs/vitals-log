@@ -24,7 +24,7 @@
     --red:#FF6B6B;
   }
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
-  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased; touch-action:manipulation; overflow-anchor:none;}
+  html,body{background:var(--ink); color:var(--text); font-family:'Public Sans',sans-serif; -webkit-font-smoothing:antialiased; touch-action:manipulation; overflow-anchor:none; overflow-x:hidden;}
   body{padding-bottom:70px;}
   .mono{font-family:'IBM Plex Mono',monospace;}
 
@@ -162,7 +162,6 @@ let expandedId = null;
 function fmtNum(n, roundInt){
   if(n === undefined || n === null || isNaN(n)) return '—';
   if (roundInt) return Math.round(n).toLocaleString();
-  if(Math.abs(n) >= 100) return n.toFixed(0);
   if(Math.abs(n) >= 10) return n.toFixed(1);
   return n.toFixed(2);
 }
