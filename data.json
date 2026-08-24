@@ -2764,6 +2764,32 @@
       "avg_hr": 98,
       "max_hr": 133,
       "elevation_ft": 197
+    },
+    {
+      "id": "28973BE7-C39F-49CB-B1DE-F89DE97B6B3F",
+      "date": "2026-08-24",
+      "start": "2026-08-24 09:14:46 -0700",
+      "end": "2026-08-24 09:24:42 -0700",
+      "name": "Mind & Body",
+      "duration_min": 9.9,
+      "distance_mi": null,
+      "calories": 45,
+      "avg_hr": 92,
+      "max_hr": 107,
+      "elevation_ft": null
+    },
+    {
+      "id": "434B11F4-7B10-488E-9632-1BB96C462100",
+      "date": "2026-08-24",
+      "start": "2026-08-24 08:20:14 -0700",
+      "end": "2026-08-24 09:10:47 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 50.5,
+      "distance_mi": null,
+      "calories": 262,
+      "avg_hr": 110,
+      "max_hr": 135,
+      "elevation_ft": null
     }
   ]
 }
