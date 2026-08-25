@@ -2790,6 +2790,19 @@
       "avg_hr": 110,
       "max_hr": 135,
       "elevation_ft": null
+    },
+    {
+      "id": "D944E3DD-CA36-4492-8868-98BB5CB86794",
+      "date": "2026-08-24",
+      "start": "2026-08-24 13:22:55 -0700",
+      "end": "2026-08-24 14:22:13 -0700",
+      "name": "Hiking",
+      "duration_min": 59.3,
+      "distance_mi": 2.98,
+      "calories": 331,
+      "avg_hr": 118,
+      "max_hr": 155,
+      "elevation_ft": 528
     }
   ]
 }
