@@ -125,6 +125,7 @@ const CATEGORY_ICONS = {
   'Body Composition': '⚖️',
   'Daily Activity': '👣',
   'Point-in-Time': '🎯',
+  'Labs': '🩸',
 };
 
 // dir: which direction counts as improvement for THIS person's goals — 'up-good' | 'down-good' | 'neutral'.
@@ -151,6 +152,13 @@ const METRICS = [
   {id:'vo2max', label:'VO2 Max', unit:'ml/kg/min', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
   {id:'cardio_recovery', label:'Cardio Recovery', unit:'bpm', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
   {id:'six_min_walk', label:'6-Min Walk Test', unit:'m', cat:'Point-in-Time', dir:'up-good', compareMode:'latestVsPrevious'},
+
+  {id:'total_chol', label:'Total Cholesterol', unit:'mg/dL', cat:'Labs', dir:'down-good', compareMode:'latestVsPrevious'},
+  {id:'ldl', label:'LDL', unit:'mg/dL', cat:'Labs', dir:'down-good', compareMode:'latestVsPrevious'},
+  {id:'hdl', label:'HDL', unit:'mg/dL', cat:'Labs', dir:'up-good', compareMode:'latestVsPrevious'},
+  {id:'triglycerides', label:'Triglycerides', unit:'mg/dL', cat:'Labs', dir:'down-good', compareMode:'latestVsPrevious'},
+  {id:'a1c', label:'A1c', unit:'%', cat:'Labs', dir:'down-good', compareMode:'latestVsPrevious'},
+  {id:'tsh', label:'TSH', unit:'mIU/L', cat:'Labs', dir:'neutral', compareMode:'latestVsPrevious'},
 ];
 
 // The handful this person actually watches day to day — everything else lives under its category below.
