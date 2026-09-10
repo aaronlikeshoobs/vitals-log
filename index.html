@@ -382,6 +382,15 @@ function render(store){
   keyMetrics.forEach(m => { html += metricRowHtml(m, store, TRAINING_DATES); });
   html += `</div></div>`;
 
+  const categoryHtml = (cat) => {
+    const metrics = METRICS.filter(m => m.cat === cat);
+    let out = `<div class="category"><div class="category-head"><h2><span>${CATEGORY_ICONS[cat] || ''}</span>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
+    metrics.forEach(m => { out += metricRowHtml(m, store, TRAINING_DATES); });
+    return out + `</div></div>`;
+  };
+
+  html += categoryHtml('Body Composition');
+
   const workouts = (store.workouts || []).slice().sort((a,b) => (b.start||'').localeCompare(a.start||'')).slice(0, 10);
   if (workouts.length) {
     html += `<div class="category"><div class="category-head"><h2><span>🏃</span>Workouts</h2><span class="count">${workouts.length}</span></div><div class="card workout-list">`;
@@ -389,13 +398,8 @@ function render(store){
     html += `</div></div>`;
   }
 
-  const categories = [...new Set(METRICS.map(m => m.cat))];
-  categories.forEach(cat => {
-    const metrics = METRICS.filter(m => m.cat === cat);
-    html += `<div class="category"><div class="category-head"><h2><span>${CATEGORY_ICONS[cat] || ''}</span>${cat}</h2><span class="count">${metrics.length}</span></div><div class="card">`;
-    metrics.forEach(m => { html += metricRowHtml(m, store, TRAINING_DATES); });
-    html += `</div></div>`;
-  });
+  const categories = [...new Set(METRICS.map(m => m.cat))].filter(cat => cat !== 'Body Composition');
+  categories.forEach(cat => { html += categoryHtml(cat); });
 
   app.innerHTML = html;
 }
