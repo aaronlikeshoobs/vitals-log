@@ -270,6 +270,10 @@ SYNC_HOURS_PACIFIC = {7, 9, 11, 13, 15, 17, 19, 21}
 
 
 def should_run_now():
+    # A manual "Run workflow" click should always run immediately — the time
+    # window only exists to space out the automatic hourly cron trigger.
+    if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+        return True
     pacific_hour = datetime.now(ZoneInfo("America/Los_Angeles")).hour
     return pacific_hour in SYNC_HOURS_PACIFIC
 
