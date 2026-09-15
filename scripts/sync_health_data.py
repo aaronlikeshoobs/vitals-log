@@ -70,11 +70,11 @@ def get_drive_service():
 
 
 def list_recent_files(service, folder_id, since_iso):
-    query = (
-        f"'{folder_id}' in parents and "
-        f"mimeType='text/json' and "
-        f"modifiedTime > '{since_iso}'"
-    )
+    # No mimeType filter: Health Auto Export's reported mimeType for these files has
+    # changed over time (seen both 'text/json' and 'application/json' for otherwise
+    # identical exports), so filtering on it silently drops real files. The folder is
+    # dedicated to these exports, so folder + modifiedTime alone is sufficient and safe.
+    query = f"'{folder_id}' in parents and modifiedTime > '{since_iso}'"
     files = []
     page_token = None
     while True:
