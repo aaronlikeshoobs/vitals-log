@@ -28,6 +28,7 @@ jobs:
       - name: Run sync
         env:
           GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: python scripts/sync_health_data.py
 
       - name: Commit and push if changed
