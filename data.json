@@ -1024,7 +1024,7 @@
     },
     {
       "date": "2026-09-19",
-      "value": 3.2
+      "value": 3.38
     },
     {
       "date": "2026-09-20",
@@ -5776,6 +5776,19 @@
       "avg_hr": 105,
       "max_hr": 145,
       "elevation_ft": 500
+    },
+    {
+      "id": "51FC61C2-B912-4D6F-8352-061B62777C2D",
+      "date": "2026-09-21",
+      "start": "2026-09-21 07:26:53 -0700",
+      "end": "2026-09-21 08:23:09 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 56.3,
+      "distance_mi": null,
+      "calories": 272,
+      "avg_hr": 106,
+      "max_hr": 147,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
