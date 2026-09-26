@@ -6102,6 +6102,32 @@
       "avg_hr": 64,
       "max_hr": 73,
       "elevation_ft": null
+    },
+    {
+      "id": "008B2120-E295-4FC0-B4AF-899C92F90AEB",
+      "date": "2026-09-25",
+      "start": "2026-09-25 07:24:31 -0700",
+      "end": "2026-09-25 08:21:48 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 57.3,
+      "distance_mi": null,
+      "calories": 431,
+      "avg_hr": 126,
+      "max_hr": 165,
+      "elevation_ft": null
+    },
+    {
+      "id": "7EFE7A3F-5CC0-40B6-A7F1-2EF196393CE6",
+      "date": "2026-09-26",
+      "start": "2026-09-26 08:48:17 -0700",
+      "end": "2026-09-26 09:34:07 -0700",
+      "name": "Indoor Cycling",
+      "duration_min": 45.8,
+      "distance_mi": null,
+      "calories": 308,
+      "avg_hr": 113,
+      "max_hr": 136,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
