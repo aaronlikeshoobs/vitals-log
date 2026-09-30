@@ -786,11 +786,15 @@
     },
     {
       "date": "2026-09-28",
-      "value": 4680.11
+      "value": 4682.11
     },
     {
       "date": "2026-09-29",
-      "value": 2440.0
+      "value": 8431.0
+    },
+    {
+      "date": "2026-09-30",
+      "value": 370.0
     }
   ],
   "distance": [
@@ -1164,7 +1168,11 @@
     },
     {
       "date": "2026-09-29",
-      "value": 1.38
+      "value": 4.89
+    },
+    {
+      "date": "2026-09-30",
+      "value": 0.18
     }
   ],
   "active_energy": [
@@ -1490,7 +1498,11 @@
     },
     {
       "date": "2026-09-28",
-      "value": 265.57
+      "value": 268.31
+    },
+    {
+      "date": "2026-09-30",
+      "value": 45.54
     }
   ],
   "exercise_time": [
@@ -1812,7 +1824,11 @@
     },
     {
       "date": "2026-09-28",
-      "value": 49
+      "value": 51
+    },
+    {
+      "date": "2026-09-30",
+      "value": 5
     }
   ],
   "flights": [
@@ -2151,6 +2167,10 @@
     {
       "date": "2026-09-28",
       "value": 2
+    },
+    {
+      "date": "2026-09-29",
+      "value": 1
     }
   ],
   "walking_speed": [
@@ -2516,7 +2536,7 @@
     },
     {
       "date": "2026-09-29",
-      "value": 2.28
+      "value": 2.23
     }
   ],
   "resting_hr": [
@@ -6293,6 +6313,32 @@
       "avg_hr": 103,
       "max_hr": 133,
       "elevation_ft": 212
+    },
+    {
+      "id": "11D87749-C363-49D2-A3FD-FD93B62B5DD4",
+      "date": "2026-09-28",
+      "start": "2026-09-28 07:21:18 -0400",
+      "end": "2026-09-28 08:10:46 -0400",
+      "name": "Traditional Strength Training",
+      "duration_min": 49.5,
+      "distance_mi": null,
+      "calories": 260,
+      "avg_hr": 112,
+      "max_hr": 144,
+      "elevation_ft": null
+    },
+    {
+      "id": "3A4266CA-8512-4B7A-9309-29B96C14C33B",
+      "date": "2026-09-30",
+      "start": "2026-09-30 07:22:04 -0400",
+      "end": "2026-09-30 07:54:32 -0400",
+      "name": "Traditional Strength Training",
+      "duration_min": 32.5,
+      "distance_mi": null,
+      "calories": 284,
+      "avg_hr": 134,
+      "max_hr": 165,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
