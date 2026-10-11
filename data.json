@@ -6639,6 +6639,19 @@
       "avg_hr": 134,
       "max_hr": 165,
       "elevation_ft": null
+    },
+    {
+      "id": "F34C12E9-53B5-4FF7-BB29-9A4198B2DEE6",
+      "date": "2026-10-10",
+      "start": "2026-10-10 13:29:48 -0300",
+      "end": "2026-10-10 13:58:09 -0300",
+      "name": "Traditional Strength Training",
+      "duration_min": 28.4,
+      "distance_mi": null,
+      "calories": 129,
+      "avg_hr": 104,
+      "max_hr": 130,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
