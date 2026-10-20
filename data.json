@@ -870,7 +870,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 955.52
+      "value": 6643.8
     }
   ],
   "distance": [
@@ -1324,7 +1324,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 0.47
+      "value": 3.29
     }
   ],
   "active_energy": [
@@ -1722,7 +1722,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 275.03
+      "value": 1026.45
     }
   ],
   "exercise_time": [
@@ -2108,7 +2108,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 50
+      "value": 98
     }
   ],
   "flights": [
@@ -2526,7 +2526,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 1.83
+      "value": 29.83
     }
   ],
   "walking_speed": [
@@ -2968,7 +2968,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 1.79
+      "value": 2.14
     }
   ],
   "resting_hr": [
@@ -3334,7 +3334,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 56
+      "value": 57
     }
   ],
   "hrv": [
@@ -3720,7 +3720,7 @@
     },
     {
       "date": "2026-10-19",
-      "value": 35.66
+      "value": 39.22
     }
   ],
   "vo2max": [
@@ -3943,6 +3943,10 @@
     {
       "date": "2026-10-18",
       "value": 39.66
+    },
+    {
+      "date": "2026-10-19",
+      "value": 40.15
     }
   ],
   "cardio_recovery": [
@@ -4120,6 +4124,10 @@
     },
     {
       "date": "2026-10-17",
+      "value": 28.79
+    },
+    {
+      "date": "2026-10-19",
       "value": 28.79
     }
   ],
@@ -6946,6 +6954,32 @@
       "avg_hr": 92,
       "max_hr": 121,
       "elevation_ft": 198
+    },
+    {
+      "id": "29DED6AF-57DD-4244-9CE3-6BE0EC47E461",
+      "date": "2026-10-19",
+      "start": "2026-10-19 15:51:07 -0700",
+      "end": "2026-10-19 16:32:16 -0700",
+      "name": "Hiking",
+      "duration_min": 41.1,
+      "distance_mi": 2.21,
+      "calories": 243,
+      "avg_hr": 104,
+      "max_hr": 124,
+      "elevation_ft": 370
+    },
+    {
+      "id": "2049DE47-A576-4F8B-B5E6-22E1E26D93A5",
+      "date": "2026-10-19",
+      "start": "2026-10-19 08:23:34 -0700",
+      "end": "2026-10-19 09:13:02 -0700",
+      "name": "Traditional Strength Training",
+      "duration_min": 49.5,
+      "distance_mi": null,
+      "calories": 226,
+      "avg_hr": 105,
+      "max_hr": 133,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
