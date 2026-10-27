@@ -902,7 +902,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 339.2
+      "value": 743.84
     }
   ],
   "distance": [
@@ -1388,7 +1388,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 0.18
+      "value": 0.38
     }
   ],
   "active_energy": [
@@ -1818,7 +1818,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 245.93
+      "value": 294.41
     }
   ],
   "exercise_time": [
@@ -2236,7 +2236,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 32
+      "value": 33
     }
   ],
   "flights": [
@@ -2686,7 +2686,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 1
+      "value": 3
     }
   ],
   "walking_speed": [
@@ -3972,7 +3972,7 @@
     },
     {
       "date": "2026-10-27",
-      "value": 23.71
+      "value": 31.31
     }
   ],
   "vo2max": [
@@ -7359,6 +7359,19 @@
       "avg_hr": 108,
       "max_hr": 135,
       "elevation_ft": 192
+    },
+    {
+      "id": "C9E63763-0E07-4267-9458-4AD44FF09BF9",
+      "date": "2026-10-27",
+      "start": "2026-10-27 09:19:07 -0700",
+      "end": "2026-10-27 09:50:06 -0700",
+      "name": "Indoor Cycling",
+      "duration_min": 31.0,
+      "distance_mi": null,
+      "calories": 203,
+      "avg_hr": 111,
+      "max_hr": 148,
+      "elevation_ft": null
     }
   ],
   "total_chol": [
