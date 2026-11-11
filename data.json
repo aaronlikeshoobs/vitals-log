@@ -990,7 +990,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 1318.32
+      "value": 8659.32
+    },
+    {
+      "date": "2026-11-11",
+      "value": 6122.79
     }
   ],
   "distance": [
@@ -1532,7 +1536,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 0.63
+      "value": 4.14
+    },
+    {
+      "date": "2026-11-11",
+      "value": 3.06
     }
   ],
   "active_energy": [
@@ -1994,7 +2002,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 374.28
+      "value": 778.71
+    },
+    {
+      "date": "2026-11-11",
+      "value": 642.66
     }
   ],
   "exercise_time": [
@@ -2444,7 +2456,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 50
+      "value": 111
+    },
+    {
+      "date": "2026-11-11",
+      "value": 72.0
     }
   ],
   "flights": [
@@ -2950,7 +2966,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 1.88
+      "value": 10.76
+    },
+    {
+      "date": "2026-11-11",
+      "value": 26.0
     }
   ],
   "walking_speed": [
@@ -3481,6 +3501,10 @@
     {
       "date": "2026-11-10",
       "value": 2.98
+    },
+    {
+      "date": "2026-11-11",
+      "value": 1.77
     }
   ],
   "resting_hr": [
@@ -3906,7 +3930,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 65
+      "value": 58
+    },
+    {
+      "date": "2026-11-11",
+      "value": 62.0
     }
   ],
   "hrv": [
@@ -4356,7 +4384,11 @@
     },
     {
       "date": "2026-11-10",
-      "value": 42.2
+      "value": 39.5
+    },
+    {
+      "date": "2026-11-11",
+      "value": 28.82
     }
   ],
   "vo2max": [
@@ -4607,6 +4639,14 @@
     {
       "date": "2026-11-09",
       "value": 41.67
+    },
+    {
+      "date": "2026-11-10",
+      "value": 40.23
+    },
+    {
+      "date": "2026-11-11",
+      "value": 40.13
     }
   ],
   "cardio_recovery": [
@@ -4813,6 +4853,14 @@
     {
       "date": "2026-11-09",
       "value": 26.65
+    },
+    {
+      "date": "2026-11-10",
+      "value": 29.43
+    },
+    {
+      "date": "2026-11-11",
+      "value": 29.43
     }
   ],
   "six_min_walk": [
@@ -7888,6 +7936,45 @@
       "calories": 212,
       "avg_hr": 102,
       "max_hr": 130,
+      "elevation_ft": null
+    },
+    {
+      "id": "AABCBC60-14DF-4260-BA37-2CD906FE84DA",
+      "date": "2026-11-10",
+      "start": "2026-11-10 15:32:01 -0800",
+      "end": "2026-11-10 16:32:31 -0800",
+      "name": "Hiking",
+      "duration_min": 60.5,
+      "distance_mi": 2.93,
+      "calories": 279,
+      "avg_hr": 104,
+      "max_hr": 133,
+      "elevation_ft": 169
+    },
+    {
+      "id": "B5C9C7F0-C702-453B-A69E-70A53FDC181B",
+      "date": "2026-11-11",
+      "start": "2026-11-11 11:09:53 -0800",
+      "end": "2026-11-11 11:53:49 -0800",
+      "name": "Hiking",
+      "duration_min": 43.9,
+      "distance_mi": 2.29,
+      "calories": 278,
+      "avg_hr": 124,
+      "max_hr": 154,
+      "elevation_ft": 372
+    },
+    {
+      "id": "8AA4689B-84BF-424D-A6DB-A587BC51EDA2",
+      "date": "2026-11-11",
+      "start": "2026-11-11 08:14:33 -0800",
+      "end": "2026-11-11 08:39:00 -0800",
+      "name": "High Intensity Interval Training",
+      "duration_min": 24.5,
+      "distance_mi": null,
+      "calories": 217,
+      "avg_hr": 135,
+      "max_hr": 166,
       "elevation_ft": null
     }
   ],
