@@ -1046,7 +1046,11 @@
     },
     {
       "date": "2026-11-20",
-      "value": 765.97
+      "value": 4310.83
+    },
+    {
+      "date": "2026-11-21",
+      "value": 833.0
     }
   ],
   "distance": [
@@ -1628,7 +1632,11 @@
     },
     {
       "date": "2026-11-20",
-      "value": 0.37
+      "value": 2.1
+    },
+    {
+      "date": "2026-11-21",
+      "value": 0.4
     }
   ],
   "active_energy": [
@@ -2126,7 +2134,11 @@
     },
     {
       "date": "2026-11-20",
-      "value": 255.14
+      "value": 589.38
+    },
+    {
+      "date": "2026-11-21",
+      "value": 358.85
     }
   ],
   "exercise_time": [
@@ -2604,7 +2616,11 @@
     },
     {
       "date": "2026-11-20",
-      "value": 27
+      "value": 49
+    },
+    {
+      "date": "2026-11-21",
+      "value": 40
     }
   ],
   "flights": [
@@ -3143,6 +3159,14 @@
     {
       "date": "2026-11-19",
       "value": 7.0
+    },
+    {
+      "date": "2026-11-20",
+      "value": 18.0
+    },
+    {
+      "date": "2026-11-21",
+      "value": 2
     }
   ],
   "walking_speed": [
@@ -4162,7 +4186,7 @@
     },
     {
       "date": "2026-11-20",
-      "value": 53
+      "value": 60
     }
   ],
   "hrv": [
@@ -4640,7 +4664,11 @@
     },
     {
       "date": "2026-11-20",
-      "value": 69.17
+      "value": 42.89
+    },
+    {
+      "date": "2026-11-21",
+      "value": 124.41
     }
   ],
   "vo2max": [
@@ -4903,6 +4931,10 @@
     {
       "date": "2026-11-12",
       "value": 40.99
+    },
+    {
+      "date": "2026-11-20",
+      "value": 40.24
     }
   ],
   "cardio_recovery": [
@@ -5121,6 +5153,10 @@
     {
       "date": "2026-11-12",
       "value": 31.85
+    },
+    {
+      "date": "2026-11-20",
+      "value": 31.85
     }
   ],
   "six_min_walk": [
@@ -5182,6 +5218,10 @@
     },
     {
       "date": "2026-11-14",
+      "value": 500
+    },
+    {
+      "date": "2026-11-21",
       "value": 500
     }
   ],
@@ -8330,6 +8370,45 @@
       "calories": 217,
       "avg_hr": 131,
       "max_hr": 163,
+      "elevation_ft": null
+    },
+    {
+      "id": "91E6CC18-0BE8-4AEA-8D05-09664844720F",
+      "date": "2026-11-20",
+      "start": "2026-11-20 15:01:40 -0800",
+      "end": "2026-11-20 15:27:24 -0800",
+      "name": "Hiking",
+      "duration_min": 25.7,
+      "distance_mi": 1.09,
+      "calories": 123,
+      "avg_hr": 92,
+      "max_hr": 115,
+      "elevation_ft": 199
+    },
+    {
+      "id": "98708624-A2A8-4BD6-988B-87059744EAC6",
+      "date": "2026-11-21",
+      "start": "2026-11-21 10:14:47 -0800",
+      "end": "2026-11-21 10:22:56 -0800",
+      "name": "Traditional Strength Training",
+      "duration_min": 8.2,
+      "distance_mi": null,
+      "calories": 56,
+      "avg_hr": 123,
+      "max_hr": 141,
+      "elevation_ft": null
+    },
+    {
+      "id": "1BD44298-8FBD-4FA3-A546-1D5EF06897C9",
+      "date": "2026-11-21",
+      "start": "2026-11-21 09:38:14 -0800",
+      "end": "2026-11-21 10:08:07 -0800",
+      "name": "Indoor Cycling",
+      "duration_min": 29.9,
+      "distance_mi": null,
+      "calories": 230,
+      "avg_hr": 124,
+      "max_hr": 164,
       "elevation_ft": null
     }
   ],
